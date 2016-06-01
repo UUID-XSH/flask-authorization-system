@@ -9,6 +9,7 @@ app.debug = True
 app.secret_key = 'secret'
 app.config.update({
     'SQLALCHEMY_DATABASE_URI': 'sqlite:///db.sqlite',
+    'SQLALCHEMY_TRACK_MODIFICATIONS': True
 })
 
 db = SQLAlchemy(app)
