@@ -1,8 +1,10 @@
 # coding: utf-8
-
+import json
 from datetime import datetime, timedelta
 
+import flask
 from authorization import oauth, app
+from authorization.alchemy_encoder import AlchemyEncoder
 from authorization.models import User, db, Client, Grant, Token, Company
 from flask import render_template, redirect, jsonify
 from flask import session, request
@@ -33,11 +35,7 @@ def home():
 
 @app.route('/company', methods=['GET'])
 def list_company():
-
-    db.session.add(Company(id = 2, name = "xxx"))
-    db.session.commit()
-
-    return Company.query.all()
+    return jsonify(flask.json.dumps(Company.query.all(), cls=AlchemyEncoder, ensure_ascii=False))
 
 
 @app.route('/client')
