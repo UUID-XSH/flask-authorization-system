@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 
 from authorization import oauth, app
-from authorization.models import User, db, Client, Grant, Token
+from authorization.models import User, db, Client, Grant, Token, Company
 from flask import render_template, redirect, jsonify
 from flask import session, request
 from werkzeug.security import gen_salt
@@ -29,6 +29,15 @@ def home():
         return redirect('/')
     user = current_user()
     return render_template('home.html', user=user)
+
+
+@app.route('/company', methods=['GET'])
+def list_company():
+
+    db.session.add(Company(id = 2, name = "xxx"))
+    db.session.commit()
+
+    return Company.query.all()
 
 
 @app.route('/client')

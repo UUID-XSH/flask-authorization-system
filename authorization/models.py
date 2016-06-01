@@ -2,9 +2,22 @@
 from authorization import db
 
 
+class Company(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    short_mark = db.Column(db.String(50))
+    domain = db.Column(db.String(50))
+    company = db.Column(db.String(50))
+    role = db.Column(db.String(50))
+    create_time = db.Column(db.DATETIME)
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), unique=True)
+    password = db.Column(db.String(500), nullable=False)
+    company_id = db.Column(db.ForeignKey('company.id'))
+    Company = db.relationship('Company')
 
 
 class Client(db.Model):

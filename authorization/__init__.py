@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_oauthlib.provider import OAuth2Provider
@@ -15,5 +16,8 @@ app.config.update({
 db = SQLAlchemy(app)
 oauth = OAuth2Provider(app)
 
-import authorization.routes
 import authorization.models
+import authorization.routes
+# import authorization.init
+
+# init.setup()
