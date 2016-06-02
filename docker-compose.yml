@@ -2,21 +2,21 @@ version: '2'
 services:
   python:
     build: .
+    environment:
+      DB_URL: mysql://root:dangerous123@db/cba
     ports:
-      - "80:80"
+      - "5000:5000"
     depends_on:
-      - java
+      - db
     links:
-      - java:java
+      - db:db
   db:
     image: mysql
-    ports:
-     - "3306:3306"
     # for test no volumes
     volumes:
-      - "/data/zx/db:/var/lib/mysql"
+      - "/data/authorization/db:/var/lib/mysql"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: dangerous123
-      MYSQL_DATABASE: zhengxin
+      MYSQL_DATABASE: cba
     command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
