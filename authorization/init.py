@@ -22,7 +22,7 @@ def setup():
         db.session.delete(u)
     db.session.commit()
     u = User()
-    u.Company = c
+    u.company = c
     u.username = "test"
     u.hash_password('test')
 

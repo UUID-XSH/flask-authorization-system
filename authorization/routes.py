@@ -52,4 +52,4 @@ def access_token():
 @app.route('/me')
 @multi_auth.login_required
 def me():
-    return jsonify(flask.json.dumps(g.current_user, cls=AlchemyEncoder, ensure_ascii=False))
+    return jsonify(flask.json.dumps(g.current_user.company, cls=AlchemyEncoder, ensure_ascii=False))
