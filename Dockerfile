@@ -1,6 +1,9 @@
 FROM python:3.4
 
-ENV DB_URL
 COPY . /data
+
+RUN pip install -r /data/requirements.txt
+
+EXPOSE 5000
 
 ENTRYPOINT python /data/app.py
