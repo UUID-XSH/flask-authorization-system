@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from authorization import db
+from passlib.apps import custom_app_context as pwd_context
 
 
 class Company(db.Model):
@@ -18,6 +19,14 @@ class User(db.Model):
     password = db.Column(db.String(500), nullable=False)
     company_id = db.Column(db.ForeignKey('company.id'))
     Company = db.relationship('Company')
+    token = db.Column(db.String(300))
+    expire_time = db.Column(db.DATETIME)
+
+    def hash_password(self, password):
+        self.password = pwd_context.encrypt(password)
+
+    def verify_password(self, password):
+        return pwd_context.verify(password, self.password)
 
 
 class Client(db.Model):

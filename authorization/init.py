@@ -23,8 +23,8 @@ def setup():
     db.session.commit()
     u = User()
     u.Company = c
-    u.username = "11111"
-    u.password = '111111'
+    u.username = "test"
+    u.hash_password('test')
 
     db.session.add(u)
     db.session.commit()

@@ -4,6 +4,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_oauthlib.provider import OAuth2Provider
+from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth, MultiAuth
 
 app = Flask(__name__, template_folder="../templates")
 app.debug = True
@@ -14,7 +15,10 @@ app.config.update({
 })
 
 db = SQLAlchemy(app)
-oauth = OAuth2Provider(app)
+# = OAuth2Provider(app)
+oauth = HTTPTokenAuth(scheme='Token')
+auth = HTTPBasicAuth()
+multi_auth = MultiAuth(oauth, auth)
 
 import authorization.models
 import authorization.routes
