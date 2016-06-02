@@ -18,7 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(40), unique=True)
     password = db.Column(db.String(500), nullable=False)
     company_id = db.Column(db.ForeignKey('company.id'))
-    Company = db.relationship('Company')
+    company = db.relationship('Company')
     token = db.Column(db.String(300))
     expire_time = db.Column(db.DATETIME)
 

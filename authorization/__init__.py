@@ -3,14 +3,19 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_oauthlib.provider import OAuth2Provider
 from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth, MultiAuth
+import os
 
 app = Flask(__name__, template_folder="../templates")
 app.debug = True
 app.secret_key = 'secret'
+
+db_url = 'sqlite:///db.sqlite'
+if os.environ.get('DB_URL'):
+    db_url = os.environ.get('DB_URL')
+
 app.config.update({
-    'SQLALCHEMY_DATABASE_URI': 'sqlite:///db.sqlite',
+    'SQLALCHEMY_DATABASE_URI': db_url,
     'SQLALCHEMY_TRACK_MODIFICATIONS': True
 })
 

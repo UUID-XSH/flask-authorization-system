@@ -4,32 +4,14 @@ from datetime import datetime, timedelta
 import flask
 from authorization import oauth, app, auth, multi_auth
 from authorization.alchemy_encoder import AlchemyEncoder
-from authorization.models import User, db, Client, Grant, Token, Company
-from flask import render_template, redirect, jsonify
-from flask import session, request, g
+from authorization.models import User, db, Company
+from flask import jsonify, g
 import uuid
 
 
-def current_user():
-    if 'id' in session:
-        uid = session['id']
-        return User.query.get(uid)
-    return None
-
-
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=['GET'])
 def home():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        user = User.query.filter_by(username=username).first()
-        if not user:
-            user = User(username=username)
-            db.session.add(user)
-            db.session.commit()
-        session['id'] = user.id
-        return redirect('/')
-    user = current_user()
-    return render_template('home.html', user=user)
+    return "welcome to credit block chain authorization server"
 
 
 @app.route('/company', methods=['GET'])
@@ -71,8 +53,3 @@ def access_token():
 @multi_auth.login_required
 def me():
     return jsonify(flask.json.dumps(g.current_user, cls=AlchemyEncoder, ensure_ascii=False))
-
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run()
