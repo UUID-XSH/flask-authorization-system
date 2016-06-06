@@ -43,7 +43,8 @@ def verify_password(username, password):
 @app.route('/oauth/token', methods=['POST'])
 @auth.login_required
 def access_token():
-    g.current_user.token = str(uuid.uuid4())
+    if g.current_user.token is None:
+        g.current_user.token = str(uuid.uuid4())
     g.current_user.expire_time = datetime.now() + timedelta(minutes=30)  # token 30 need refresh
     db.session.commit()
     return g.current_user.token
