@@ -10,6 +10,8 @@ services:
       - db
     links:
       - db:db
+    volumes:
+      - "/data/authorization/static:/data/static"
   db:
     image: mysql
     # for test no volumes
