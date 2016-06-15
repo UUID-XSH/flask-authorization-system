@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_httpauth import HTTPTokenAuth, HTTPBasicAuth, MultiAuth
 import os
 
-app = Flask(__name__, template_folder="../templates")
+app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.debug = True
 app.secret_key = 'secret'
 
