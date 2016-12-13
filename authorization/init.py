@@ -13,12 +13,12 @@ def setup():
         db.session.delete(c)
     db.session.commit()
     c = Company()
-    c.company = "上海凯岸"
+    c.company = "Test"
     c.create_time = datetime.now()
-    c.domain = "http://madailicai.com"
-    c.name = "麻袋理财"
-    c.role = "MEMBER"
-    c.short_mark = "MDLC"
+    c.domain = "http://test.com"
+    c.name = "Test"
+    c.role = "Test"
+    c.short_mark = "Test"
 
     db.session.add(c)
 
